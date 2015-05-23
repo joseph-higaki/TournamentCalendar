@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 
 import com.japanigger.tournamentcalendar.dao.TeamDAO;
+import com.japanigger.tournamentcalendar.dao.rest.TaskGetTeams;
 import com.japanigger.tournamentcalendar.data.Team;
 import com.japanigger.tournamentcalendar.data.TeamPlayer;
 import com.japanigger.tournamentcalendar.dummy.DummyContent;
@@ -29,7 +30,7 @@ import java.util.List;
  * Activities containing this fragment MUST implement the {@link OnFragmentInteractionListener}
  * interface.
  */
-public class TeamPlayerFragment extends Fragment implements AbsListView.OnItemClickListener {
+public class TeamPlayerFragment extends Fragment implements AbsListView.OnItemClickListener, TaskGetTeams.OnTaskCompleted {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -76,29 +77,21 @@ public class TeamPlayerFragment extends Fragment implements AbsListView.OnItemCl
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         if (getArguments() != null) {
             mTeamPosition = getArguments().getInt(ARG_TEAM_POSITION);
-            //mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-        teamDAO = new TeamDAO();
-        teamList = teamDAO.getAll();
-
-        Team selectedTeam = teamList.get(mTeamPosition);
-
-        mAdapter = new ArrayAdapter<TeamPlayer>(getActivity(),
-                android.R.layout.simple_list_item_1, android.R.id.text1, selectedTeam.getPlayers());
+        TaskGetTeams task = new TaskGetTeams(this);
+        task.execute();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_teamplayer, container, false);
+        View view = inflater.inflate(R.layout.fragment_teamplayer_list, container, false);
 
         // Set the adapter
         mListView = (AbsListView) view.findViewById(android.R.id.list);
-        ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
 
         // Set OnItemClickListener so we can be notified on item clicks
         mListView.setOnItemClickListener(this);
@@ -145,6 +138,15 @@ public class TeamPlayerFragment extends Fragment implements AbsListView.OnItemCl
         if (emptyView instanceof TextView) {
             ((TextView) emptyView).setText(emptyText);
         }
+    }
+
+    @Override
+    public void onTaskCompleted(List<Team> teams) {
+        teamList=teams;
+        Team selectedTeam = teamList.get(mTeamPosition);
+        mAdapter = new ArrayAdapter<TeamPlayer>(getActivity(),
+                android.R.layout.simple_list_item_1, android.R.id.text1, selectedTeam.getPlayers());
+        ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
     }
 
     /**
