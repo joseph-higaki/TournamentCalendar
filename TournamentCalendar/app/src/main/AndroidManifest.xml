@@ -2,8 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.japanigger.tournamentcalendar" >
 
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
@@ -11,13 +10,11 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"
             android:theme="@style/AppTheme" />
-
         <activity
             android:name=".LoginActivity"
             android:label="@string/app_name" >
@@ -27,25 +24,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".TeamPlayerListActivity"
-            android:label="@string/title_activity_team_player_list">
+            android:label="@string/title_activity_team_player_list" >
         </activity>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/appId" />
-
         <meta-data
             android:name="com.facebook.sdk.ApplicationName"
             android:value="Japanigger Tournament Calendar" />
-
 
         <provider
             android:name="com.facebook.FacebookContentProvider"
             android:authorities="com.facebook.app.FacebookContentProvider405936019598758"
             android:exported="true" />
+
+        <activity
+            android:name=".AddMatch"
+            android:label="@string/title_activity_add_match" >
+        </activity>
     </application>
 
 </manifest>
