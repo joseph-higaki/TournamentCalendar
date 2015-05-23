@@ -3,6 +3,8 @@ package com.japanigger.tournamentcalendar.dao.rest;
 
 import android.util.Log;
 
+import com.japanigger.tournamentcalendar.data.City;
+import com.japanigger.tournamentcalendar.data.Match;
 import com.japanigger.tournamentcalendar.data.Team;
 import com.japanigger.tournamentcalendar.data.TeamPlayer;
 
@@ -18,6 +20,29 @@ import java.util.List;
  */
 public class JsonParserUtil {
 
+    public List<Match> getMatches(JSONArray reader) throws JSONException {
+        List<Match> matches = new ArrayList<>();
+        Match match;
+        for (int i = 0; i < reader.length(); i++) {
+            JSONObject jsonMatch = reader.getJSONObject(i);
+            match = new Match();
+            match.setId(jsonMatch.getInt("id"));
+            match.setLocation(getLocation(jsonMatch.getJSONObject("location")));
+            match.setTeam1(getTeam(jsonMatch.getJSONObject("team1")));
+            match.setTeam2(getTeam(jsonMatch.getJSONObject("team2")));
+            match.setDate(jsonMatch.has("date")?jsonMatch.getString("date"):"");
+            matches.add(match);
+        }
+        return matches;
+    }
+
+    private City getLocation(JSONObject location) throws JSONException {
+        City city = new City();
+        city.setName(location.has("name")?location.getString("name"):"");
+        city.setId(location.getInt("id"));
+        return city;
+    }
+
     public List<Team> getTeams(JSONArray reader) throws JSONException {
         Log.d(getClass().getName(),"getTeams value: "+reader.toString());
         List<Team> teams = new ArrayList<>();
@@ -31,11 +56,13 @@ public class JsonParserUtil {
     }
 
     public Team getTeam(JSONObject reader) throws JSONException {
-        Log.d(getClass().getName(),"getTeam values: "+reader.toString());
+        Log.d(getClass().getName(), "getTeam values: " + reader.toString());
         Team team = new Team();
         team.setId(reader.getInt("id"));
-        team.setName(reader.getString("name"));
-        team.setPlayers(getPlayers(reader.getJSONArray("players")));
+        team.setName(reader.has("name") ? reader.getString("name") : "");
+        if (reader.has("players")){
+            team.setPlayers(getPlayers(reader.getJSONArray("players")));
+        }
         return team;
     }
 
@@ -53,5 +80,6 @@ public class JsonParserUtil {
         }
         return players;
     }
+
 
 }

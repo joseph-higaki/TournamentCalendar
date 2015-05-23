@@ -1,13 +1,11 @@
 package com.japanigger.tournamentcalendar.data;
 
-import java.util.Date;
-
 /**
  * Created by usuario on 5/21/2015.
  */
 public class Match {
     private long id;
-    private Date date;
+    private String date;
     private City location;
     private Team team1;
     private Team team2;
@@ -22,11 +20,11 @@ public class Match {
         this.id = id;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

@@ -4,6 +4,8 @@ package com.japanigger.tournamentcalendar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
@@ -38,17 +40,23 @@ public class TeamActivity extends Activity implements TaskGetTeams.OnTaskComplet
         TaskGetTeams task = new TaskGetTeams(this);
         task.execute();
 
+
+    }
+
+    @Override
+    public void onTaskCompleted(List<Team> teams) {
+        teamList = teams;
+
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
         // Set the adapter for the list view
-        mDrawerList.setAdapter(new ArrayAdapter<Team>(this,
-                R.layout.team_list_item, teamList));
+        mDrawerList.setAdapter(new ArrayAdapter<>(this,
+                R.layout.team_list_item, teams));
         // Set the list's click listener
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
-        if (savedInstanceState == null) {
-            selectItem(0);
-        }
+        /*
+
 // enable ActionBar app icon to behave as action to toggle nav drawer
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
@@ -56,11 +64,11 @@ public class TeamActivity extends Activity implements TaskGetTeams.OnTaskComplet
         // ActionBarDrawerToggle ties together the the proper interactions
         // between the sliding drawer and the action bar app icon
         mDrawerToggle = new ActionBarDrawerToggle(
-                this,                  /* host Activity */
-                mDrawerLayout,         /* DrawerLayout object */
-                R.drawable.ic_drawer,  /* nav drawer image to replace 'Up' caret */
-                R.string.navigation_drawer_open,  /* "open drawer" description for accessibility */
-                R.string.navigation_drawer_close  /* "close drawer" description for accessibility */
+                this,
+                mDrawerLayout,
+                R.drawable.ic_drawer,
+                R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close
         ) {
             public void onDrawerClosed(View view) {
                 getActionBar().setTitle(selectedTeam);
@@ -73,16 +81,7 @@ public class TeamActivity extends Activity implements TaskGetTeams.OnTaskComplet
             }
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
-    }
-
-    @Override
-    public void onTaskCompleted(List<Team> teams) {
-        teamList = teams;
-        // Set the adapter for the list view
-        mDrawerList.setAdapter(new ArrayAdapter<>(this,
-                R.layout.team_list_item, teams));
-        // Set the list's click listener
-        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+        */
     }
 
     /* The click listner for ListView in the navigation drawer */
@@ -110,6 +109,22 @@ public class TeamActivity extends Activity implements TaskGetTeams.OnTaskComplet
         mDrawerLayout.closeDrawer(mDrawerList);
     }
 
+    private void openMatchListFragment(){
+        /*
+        // update the main content by replacing fragments
+        Fragment fragment = new MatchListFragment();
+
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.content_frame, fragment);
+        fragmentTransaction.addToBackStack(null);
+
+        fragmentTransaction.commit();
+
+        */
+        Intent intent = new Intent(this, MatchActivity.class);
+        startActivity(intent);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -127,7 +142,7 @@ public class TeamActivity extends Activity implements TaskGetTeams.OnTaskComplet
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            openMatchListFragment();
         }
         if (id == android.R.id.home) {
             Toast.makeText(this, "fsdf", Toast.LENGTH_LONG).show();
