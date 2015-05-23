@@ -4,8 +4,17 @@ package com.japanigger.tournamentcalendar.data;
  * Created by usuario on 5/21/2015.
  */
 public class TeamPlayer {
-    public String getFullName() {
-        return firstName + " " + lastName;
+
+    private int id;
+    private String firstName;
+    private String lastName;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -24,18 +33,16 @@ public class TeamPlayer {
         this.lastName = lastName;
     }
 
-    public int getId() {
-        return id;
+
+    public TeamPlayer() {
+        super();
     }
 
-    public void setId(int id) {
+    public TeamPlayer(int id, String firstName, String lastName) {
+        super();
         this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
-
-    private String firstName;
-    private String lastName;
-
-
-    private int id;
 
 }
