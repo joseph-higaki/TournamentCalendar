@@ -4,16 +4,51 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+
+import com.japanigger.tournamentcalendar.dao.MatchDAO;
+import com.japanigger.tournamentcalendar.data.City;
+import com.japanigger.tournamentcalendar.data.Match;
+import com.japanigger.tournamentcalendar.data.Team;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class AddMatch extends ActionBarActivity {
+    private MatchDAO matchDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_match);
+        matchDAO = new MatchDAO(this);
+        matchDAO.open();
+
     }
 
+    public void saveMatch(View view) {
+        try {
+
+            Match match = new Match();
+            //EditText txtUser = (EditText) findViewById(R.id.txtUser);
+            match.setDate(new Date());
+
+            City city = new City("Lima");
+            match.setLocation(city);
+
+            Team team1 = new Team("Peru");
+            match.setTeam1(team1);
+            Team team2 = new Team("Chile");
+            match.setTeam2(team2);
+
+            matchDAO.save(match);
+        }
+        finally{
+            matchDAO.close();
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
