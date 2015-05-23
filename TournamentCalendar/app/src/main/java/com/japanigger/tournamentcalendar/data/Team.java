@@ -1,5 +1,6 @@
 package com.japanigger.tournamentcalendar.data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -39,6 +40,12 @@ public class Team {
     public Team(String name) {
         super();
         this.name = name;
+
+        /* For testing purposes only*/
+        players = new ArrayList<TeamPlayer>();
+        for (int i=0; i<11; i++)
+            players.add(new TeamPlayer(i, "Player "+i, name));
+        /* For testing purposes only*/
     }
 
     public List<TeamPlayer> getPlayers() {
