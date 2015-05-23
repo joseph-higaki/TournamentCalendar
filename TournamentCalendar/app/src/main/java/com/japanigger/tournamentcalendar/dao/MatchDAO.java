@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 
-import com.example.student.sqllitedemo.domain.User;
+//import com.example.student.sqllitedemo.domain.User;
 
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
@@ -15,6 +15,8 @@ import java.util.List;
 /**
  * Created by Student on 02/08/2014.
  */
+
+/*
 public class MatchDAO {
     private MySQLOpenHelper dbHelper;
     private SQLiteDatabase database;
@@ -81,3 +83,5 @@ public class MatchDAO {
     public void delete(int id) {
     }
 }
+
+*/
