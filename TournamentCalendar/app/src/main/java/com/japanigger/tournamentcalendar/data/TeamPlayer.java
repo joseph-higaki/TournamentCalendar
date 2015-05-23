@@ -5,12 +5,37 @@ package com.japanigger.tournamentcalendar.data;
  */
 public class TeamPlayer {
     public String getFullName() {
-        return fullName;
+        return firstName + " " + lastName;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    private String fullName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    private String firstName;
+    private String lastName;
+
+
+    private int id;
+
 }
