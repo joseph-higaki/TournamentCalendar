@@ -29,18 +29,10 @@ public class TeamPlayer {
         return lastName;
     }
 
-    public String getFullName() {
-        return firstName + " " + lastName;
-    }
-
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
-    @Override
-    public String toString() {
-        return getFullName();
-    }
 
     public TeamPlayer() {
         super();
