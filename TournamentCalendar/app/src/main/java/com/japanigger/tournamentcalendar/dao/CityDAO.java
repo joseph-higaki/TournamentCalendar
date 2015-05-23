@@ -3,6 +3,8 @@
         import android.content.Context;
         import android.database.Cursor;
         import android.database.sqlite.SQLiteDatabase;
+        import android.database.sqlite.SQLiteException;
+        import android.util.Log;
 
         import com.japanigger.tournamentcalendar.data.City;
 
@@ -17,7 +19,7 @@ public class CityDAO {
     private SQLiteDatabase database;
 
     public CityDAO(Context context) {
-        dbHelper = new MySQLOpenHelper(context);
+        dbHelper = new MySQLOpenHelper(context, null, null, 1);
     }
 
     public void open() {
@@ -30,15 +32,24 @@ public class CityDAO {
 
     public List<City> getAll() {
         List<City> cities = new ArrayList<City>();
-        String[] columns = {"name"};
-        Cursor cursor = database.query("city", columns, null, null, null, null, null);
+
+        String query = "SELECT name FROM city";
+
+
         try {
+            open();
+            Cursor cursor = database.rawQuery(query, null);
             for (boolean hasItem = cursor.moveToFirst(); hasItem; hasItem = cursor.moveToNext()) {
                 City city = new City(cursor.getString(cursor.getColumnIndex("name")));
                 cities.add(city);
             }
-        } finally {
             cursor.close();
+        } catch (SQLiteException ex){
+            Log.d(this.getClass().toString(), "ex---> " + ex.getMessage());
+
+        }finally {
+
+            close();
         }
         return cities;
     }

@@ -4,6 +4,7 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,8 +14,10 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.japanigger.tournamentcalendar.dao.rest.TaskGetMatches;
@@ -52,9 +55,14 @@ public class MatchListFragment extends Fragment  implements AbsListView.OnItemCl
 
     public void onTaskCompleted(List<Match> matches) {
         matchList = matches;
+        /*
         ListAdapter mAdapter = new ArrayAdapter<Match>(getActivity(),
                 R.layout.match_list_item, android.R.id.text1, matchList);
-        ((AdapterView<ListAdapter>) matchListView).setAdapter(mAdapter);
+        ((AdapterView<ListAdapter>) matchListView).setAdapter(mAdapter);*/
+
+
+       // listview = (ListView) findViewById(R.id.listview);
+        matchListView.setAdapter(new MatchAdapter(this.getActivity(), matchList));
 /*
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
@@ -99,5 +107,69 @@ public class MatchListFragment extends Fragment  implements AbsListView.OnItemCl
 
     }
 
+    class MatchAdapter extends BaseAdapter {
 
+        Context context;
+        List<Match> data;
+        private LayoutInflater inflater = null;
+
+        public MatchAdapter(Context context, List<Match> data) {
+            // TODO Auto-generated constructor stub
+            this.context = context;
+            this.data = data;
+            inflater = (LayoutInflater) context
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        }
+
+        @Override
+        public int getCount() {
+            // TODO Auto-generated method stub
+            return data.size();
+        }
+
+        @Override
+        public Match getItem(int position) {
+            // TODO Auto-generated method stub
+            return data.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            // TODO Auto-generated method stub
+            return position;
+        }
+
+        private class ViewHolder{
+            public TextView txtTeams;
+            public TextView txtDate;
+
+            private ViewHolder(TextView txtTeams, TextView txtDate) {
+                this.txtTeams = txtTeams;
+                this.txtDate = txtDate;
+            }
+
+            public void setMatch(Match match){
+                txtTeams.setText(match.getTeam1().getName() + " vs " + match.getTeam2().getName());
+                txtDate.setText(match.getDate());
+            }
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            // TODO Auto-generated method stub
+            ViewHolder viewHolder = null;
+            View vi = convertView;
+            if (vi == null) {
+                vi = inflater.inflate(R.layout.match_list_item, null);
+                viewHolder = new ViewHolder((TextView) vi.findViewById(R.id.txtTeams), (TextView) vi.findViewById(R.id.txtDate));
+                vi.setTag(viewHolder);
+            }
+            else
+                viewHolder = (ViewHolder)vi.getTag();
+
+            Match match = data.get(position);
+            viewHolder.setMatch(match);
+            return vi;
+        }
+    }
 }

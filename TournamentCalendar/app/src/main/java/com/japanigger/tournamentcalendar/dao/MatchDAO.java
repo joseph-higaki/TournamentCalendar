@@ -24,7 +24,7 @@ public class MatchDAO {
     private SQLiteDatabase database;
 
     public MatchDAO(Context context) {
-        dbHelper = new MySQLOpenHelper(context);
+        dbHelper = new MySQLOpenHelper(context,null,null,1);
     }
 
     public void open() {

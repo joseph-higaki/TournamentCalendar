@@ -9,34 +9,27 @@ import android.util.Log;
  * Created by Student on 02/08/2014.
  */
 public class MySQLOpenHelper extends SQLiteOpenHelper {
-    //private const String databaseName = "myDatabase.db";
-
-    private String sqlCreateMatchTable =
-            "create table match (id integer primary key autoincrement, " +
-            "matchdate DATE not null, " +
-            "city VARCHAR(60) not null, " +
-            "team1 VARCHAR(60) not null, " +
-            "team2 VARCHAR(60) not null)";
+    private static final int DATABASE_VERSION = 1;
+    private static final String DATABASE_NAME = "tournamentDB.db";
+    private static final String TABLE_CITY = "city";
 
     private String sqlCreateCityTable =
-            "create table city (name VARCHAR(60) not null)";
+            "CREATE TABLE city (name VARCHAR(60) not null)";
 
     private String sqlInsertCityTable =
-            "insert into city (name) values ('Lima', 'Santiago', 'Tarapoto')";
+            "INSERT INTO city (name) values ('Lima'), ('Santiago'), ('Tarapoto')";
 
     private String sqlDropCityTable = " drop table if exists city ";
 
-
-    private String sqlDropMatchTable = " drop table if exists match ";
-    public MySQLOpenHelper(Context context) {
-        super(context, "myDatabaseNew.db", null, 1);
+    public MySQLOpenHelper(Context context, String name,
+                           SQLiteDatabase.CursorFactory factory, int version) {
+        super(context, DATABASE_NAME, factory, DATABASE_VERSION);
         Log.d(this.getClass().toString(), "Constructor");
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         Log.d(this.getClass().toString(), "before onCreate");
-        db.execSQL(sqlCreateMatchTable);
         db.execSQL(sqlCreateCityTable);
         Log.d(this.getClass().toString(), "after onCreate");
         db.execSQL(sqlInsertCityTable);
@@ -45,7 +38,6 @@ public class MySQLOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL(sqlDropMatchTable);
         db.execSQL(sqlDropCityTable);
         onCreate(db);
         Log.d(this.getClass().toString(), "onUpgrade");
