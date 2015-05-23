@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
+import android.util.Log;
 
 import com.japanigger.tournamentcalendar.data.Match;
 
@@ -54,9 +55,11 @@ public class MatchDAO {
 
     public void save(Match match) {
         if (match != null){
-            if (match.getId() == 0)
+            if (match.getId() == 0) {
                 //new
-              add(match);
+                Log.d("AddMatch", "3 MatchDAO-save");
+                add(match);
+            }
             //else
                 //update(match);
         }
@@ -69,7 +72,7 @@ public class MatchDAO {
         values.put("team1", match.getTeam1().getName());
         values.put("team2", match.getTeam2().getName());
         //add userid
-
+        Log.d("AddMatch", "4 MatchDAO-add");
         long id =  database.insert("match", null, values);
         match.setId(id);
         return match.getId();

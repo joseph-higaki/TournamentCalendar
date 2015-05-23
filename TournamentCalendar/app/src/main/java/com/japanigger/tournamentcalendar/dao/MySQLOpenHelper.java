@@ -11,14 +11,14 @@ import android.util.Log;
 public class MySQLOpenHelper extends SQLiteOpenHelper {
     //private const String databaseName = "myDatabase.db";
 
-    private String sqlCreateMatchTable =
-            "create table match (id integer primary key autoincrement, " +
-            "matchdate DATE not null, " +
-            "city VARCHAR(60) not null, " +
-            "team1 VARCHAR(60) not null, " +
-            "team2 VARCHAR(60) not null)";
+    private String sqlCreateCityTable =
+            "create table city (name VARCHAR(60) not null)";
 
-    private String sqlDropMatchTable = " drop table if exists match ";
+    private String sqlInsertCityTable =
+            "insert into city (name) values ('Lima', 'Santiago', 'Tarapoto')";
+
+    private String sqlDropCityTable = " drop table if exists city ";
+
     public MySQLOpenHelper(Context context) {
         super(context, "myDatabaseNew.db", null, 1);
         Log.d(this.getClass().toString(), "Constructor");
@@ -27,13 +27,15 @@ public class MySQLOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         Log.d(this.getClass().toString(), "before onCreate");
-        db.execSQL(sqlCreateMatchTable);
+        db.execSQL(sqlCreateCityTable);
         Log.d(this.getClass().toString(), "after onCreate");
+        db.execSQL(sqlInsertCityTable);
+        Log.d(this.getClass().toString(), "after Insert");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL(sqlDropMatchTable);
+        db.execSQL(sqlDropCityTable);
         onCreate(db);
         Log.d(this.getClass().toString(), "onUpgrade");
     }
