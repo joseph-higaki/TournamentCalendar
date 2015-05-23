@@ -56,11 +56,13 @@ public class JsonParserUtil {
     }
 
     public Team getTeam(JSONObject reader) throws JSONException {
-        Log.d(getClass().getName(),"getTeam values: "+reader.toString());
+        Log.d(getClass().getName(), "getTeam values: " + reader.toString());
         Team team = new Team();
         team.setId(reader.getInt("id"));
-        team.setName(reader.has("name")?reader.getString("name"):"");
-        team.setPlayers(getPlayers(reader.getJSONArray("players")));
+        team.setName(reader.has("name") ? reader.getString("name") : "");
+        if (reader.has("players")){
+            team.setPlayers(getPlayers(reader.getJSONArray("players")));
+        }
         return team;
     }
 

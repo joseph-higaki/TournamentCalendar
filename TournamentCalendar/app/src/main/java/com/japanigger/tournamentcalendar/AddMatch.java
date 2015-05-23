@@ -33,7 +33,7 @@ public class AddMatch extends ActionBarActivity {
 
             Match match = new Match();
             //EditText txtUser = (EditText) findViewById(R.id.txtUser);
-            match.setDate(new Date());
+            match.setDate((new Date()).toString());
 
             City city = new City("Lima");
             match.setLocation(city);
