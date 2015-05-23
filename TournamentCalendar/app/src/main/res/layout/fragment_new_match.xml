@@ -4,34 +4,57 @@
     tools:context="com.japanigger.tournamentcalendar.NewMatchDialog">
 
     <!-- TODO: Update blank fragment layout -->
-
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
-
-    <Button
-        android:id="@+id/btnSelectDate"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Select Date" />
+        android:padding="10dip">
+        <!--  Date Label -->
+        <TextView android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#372c24"
+            android:text="Date"/>
+        <EditText android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:layout_marginBottom="20dip"
+            android:singleLine="true"/>
+        <!--  Time Label -->
+        <TextView android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#372c24"
+            android:text="Time"/>
+        <EditText android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:layout_marginBottom="20dip"
+            android:singleLine="true"/>
+        <!--  City Label -->
+        <TextView android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#372c24"
+            android:text="City"/>
+        <Spinner
+            android:id="@+id/cities_spinner"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+        <!-- Save button -->
+        <Button android:id="@+id/btnLogin"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip"
+            android:text="Save"/>
+        <!-- Link to Registration Screen -->
+        <TextView android:id="@+id/link_to_register"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dip"
+            android:layout_marginBottom="40dip"
+            android:text="New to Twitter? Register here"
+            android:gravity="center"
+            android:textSize="20dip"
+            android:textColor="#0b84aa"/>
 
-    <TextView
-        android:id="@+id/lblDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Current Date (M-D-YYYY): "
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
-        android:id="@+id/tvDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <DatePicker
-        android:id="@+id/dpResult"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
     </LinearLayout>
 </FrameLayout>
