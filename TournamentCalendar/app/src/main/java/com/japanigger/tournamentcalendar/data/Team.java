@@ -13,6 +13,7 @@ public class Team {
         this.name = name;
     }
 
-
-
+    public Team(String name) {
+        this.name = name;
+    }
 }

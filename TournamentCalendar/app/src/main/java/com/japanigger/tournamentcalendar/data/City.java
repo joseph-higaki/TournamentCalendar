@@ -13,4 +13,7 @@ public class City {
         this.name = name;
     }
 
+    public City(String name) {
+        this.name = name;
+    }
 }
