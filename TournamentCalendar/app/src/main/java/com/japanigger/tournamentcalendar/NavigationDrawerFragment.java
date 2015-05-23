@@ -22,6 +22,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.japanigger.tournamentcalendar.dao.TeamDAO;
+import com.japanigger.tournamentcalendar.data.Team;
+
+import java.util.List;
+
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
  * See the <a href="https://developer.android.com/design/patterns/navigation-drawer.html#Interaction">
@@ -58,6 +63,9 @@ public class NavigationDrawerFragment extends Fragment {
     private boolean mFromSavedInstanceState;
     private boolean mUserLearnedDrawer;
 
+    private List<Team> teamList;
+    private TeamDAO teamDAO;
+
     public NavigationDrawerFragment() {
     }
 
@@ -77,7 +85,14 @@ public class NavigationDrawerFragment extends Fragment {
 
         // Select either the default item (0) or the last selected item.
         selectItem(mCurrentSelectedPosition);
+
+        init();
     }
+
+    private void init(){
+        teamDAO = new TeamDAO();
+    }
+
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -97,15 +112,14 @@ public class NavigationDrawerFragment extends Fragment {
                 selectItem(position);
             }
         });
-        mDrawerListView.setAdapter(new ArrayAdapter<String>(
+
+        teamList = teamDAO.getAll();
+
+        mDrawerListView.setAdapter(new ArrayAdapter<Team>(
                 getActionBar().getThemedContext(),
                 android.R.layout.simple_list_item_activated_1,
                 android.R.id.text1,
-                new String[]{
-                        getString(R.string.title_section1),
-                        getString(R.string.title_section2),
-                        getString(R.string.title_section3),
-                }));
+                teamList));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
     }
