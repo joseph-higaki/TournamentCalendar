@@ -23,5 +23,6 @@
     <string name="add_match_date">Date</string>
     <string name="add_match_time">Time</string>
     <string name="add_match_city">City</string>
+    <string name="title_activity_team">TeamActivity</string>
 
 </resources>
