@@ -6,7 +6,7 @@ import java.util.Date;
  * Created by usuario on 5/21/2015.
  */
 public class Match {
-    private int id;
+    private long id;
     private Date date;
     private City location;
     private Team team1;
@@ -14,11 +14,11 @@ public class Match {
     private int userId;
 
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

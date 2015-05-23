@@ -6,7 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 
-import com.example.student.sqllitedemo.domain.User;
+import com.japanigger.tournamentcalendar.data.Match;
+
+//import com.example.student.sqllitedemo.domain.User;
 
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
@@ -15,6 +17,8 @@ import java.util.List;
 /**
  * Created by Student on 02/08/2014.
  */
+
+
 public class MatchDAO {
     private MySQLOpenHelper dbHelper;
     private SQLiteDatabase database;
@@ -31,51 +35,56 @@ public class MatchDAO {
         dbHelper.close();
     }
 
-    public List<User> getAll() {
-        List<User> users = new ArrayList<User>();
-        String[] columns = {"id", "name"};
-        Cursor cursor = database.query("user", columns, null, null, null, null, null);
+    /*public List<Match> getAll() {
+        List<Match> matches = new ArrayList<Match>();
+        String[] columns = {"id", "matchdate", "city", "team1", "team2"};
+        Cursor cursor = database.query("match", columns, null, null, null, null, null);
         try {
             for (boolean hasItem = cursor.moveToFirst(); hasItem; hasItem = cursor.moveToNext()) {
-                User user = new User();
-                user.setId(cursor.getLong(cursor.getColumnIndex("id")));
-                user.setName(cursor.getString(cursor.getColumnIndex("name")));
-                users.add(user);
+                Match match = new Match();
+                match.setId(cursor.getLong(cursor.getColumnIndex("id")));
+                match.setDate(cursor.getString(cursor.getColumnIndex("matchdate")));
+                matches.add(match);
             }
         } finally {
             cursor.close();
         }
-        return users;
-    }
+        return match;
+    }*/
 
-    public void save(User user) {
-        if (user != null){
-            if (user.getId() == 0)
+    public void save(Match match) {
+        if (match != null){
+            if (match.getId() == 0)
                 //new
-              add(user);
-            else
-                update(user);
+              add(match);
+            //else
+                //update(match);
         }
     }
 
-    protected long add(User user){
+    protected long add(Match match){
         ContentValues values = new ContentValues();
-        values.put("name", user.getName());
-        long id =  database.insert("user", null, values);
-        user.setId(id);
-        return user.getId();
+        values.put("matchdate", match.getDate().toString());
+        values.put("city", match.getLocation().getName());
+        values.put("team1", match.getTeam1().getName());
+        values.put("team2", match.getTeam2().getName());
+        //add userid
+
+        long id =  database.insert("match", null, values);
+        match.setId(id);
+        return match.getId();
     }
 
-    protected int update(User user) {
+    /*protected int update(Match match) {
         ContentValues setValues = new ContentValues();
-        setValues.put("name", user.getName());
+        setValues.put("name", match.getName());
         String whereStatement = "id = ?";
         String[] whereValues = { user.getId()+"" };
 
         int count =  database.update("user", setValues, whereStatement, whereValues);
         return count;
 
-    }
+    }*/
 
 
     public void delete(int id) {

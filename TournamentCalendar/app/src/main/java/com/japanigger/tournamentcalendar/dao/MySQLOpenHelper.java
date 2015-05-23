@@ -11,9 +11,14 @@ import android.util.Log;
 public class MySQLOpenHelper extends SQLiteOpenHelper {
     //private const String databaseName = "myDatabase.db";
 
-    private String sqlCreateUserTable = "create table match (id integer primary key autoincrement, " +
-                                        "name text not null) ";
-    private String sqlDropUserTable = " drop table if exists user ";
+    private String sqlCreateMatchTable =
+            "create table match (id integer primary key autoincrement, " +
+            "matchdate DATE not null, " +
+            "city VARCHAR(60) not null, " +
+            "team1 VARCHAR(60) not null, " +
+            "team2 VARCHAR(60) not null)";
+
+    private String sqlDropMatchTable = " drop table if exists match ";
     public MySQLOpenHelper(Context context) {
         super(context, "myDatabaseNew.db", null, 1);
         Log.d(this.getClass().toString(), "Constructor");
@@ -22,13 +27,13 @@ public class MySQLOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         Log.d(this.getClass().toString(), "before onCreate");
-        db.execSQL(sqlCreateUserTable);
+        db.execSQL(sqlCreateMatchTable);
         Log.d(this.getClass().toString(), "after onCreate");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL(sqlDropUserTable);
+        db.execSQL(sqlDropMatchTable);
         onCreate(db);
         Log.d(this.getClass().toString(), "onUpgrade");
     }
