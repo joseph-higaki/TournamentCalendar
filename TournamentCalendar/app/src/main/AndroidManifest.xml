@@ -20,7 +20,6 @@
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -28,7 +27,11 @@
             android:name=".TeamPlayerListActivity"
             android:label="@string/title_activity_team_player_list" >
         </activity>
+        <activity
+            android:name=".MatchActivity"
+            android:label="@string/match_activity_title" >
 
+        </activity>
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/appId" />
@@ -41,10 +44,6 @@
             android:authorities="com.facebook.app.FacebookContentProvider405936019598758"
             android:exported="true" />
 
-        <activity
-            android:name=".AddMatch"
-            android:label="@string/title_activity_add_match" >
-        </activity>
     </application>
 
 </manifest>
