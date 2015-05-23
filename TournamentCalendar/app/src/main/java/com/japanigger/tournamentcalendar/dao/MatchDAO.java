@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteStatement;
 
 import com.japanigger.tournamentcalendar.data.Match;
 
+//import com.example.student.sqllitedemo.domain.User;
+
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +17,8 @@ import java.util.List;
 /**
  * Created by Student on 02/08/2014.
  */
+
+
 public class MatchDAO {
     private MySQLOpenHelper dbHelper;
     private SQLiteDatabase database;
