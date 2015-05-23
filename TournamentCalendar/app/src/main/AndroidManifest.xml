@@ -24,12 +24,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".TeamPlayerListActivity"
-            android:label="@string/title_activity_team_player_list"
-            android:theme="@style/AppTheme" >
-
-        </activity>
-        <activity
             android:name=".MatchActivity"
             android:label="@string/match_activity_title" >
 
