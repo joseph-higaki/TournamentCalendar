@@ -19,10 +19,12 @@
     <string name="appId">"405936019598758"</string>
     <string name="title_activity_add_match">AddMatch</string>
 
-<!-- Activity Add Match -->
-    <string name="add_match_date">Date</string>
-    <string name="add_match_time">Time</string>
-    <string name="add_match_city">City</string>
+<!-- Match Activity-->
+    <string name="match_activity_title">Match List</string>
+<!-- Activity New Match -->
+    <string name="new_match_date">Date</string>
+    <string name="new_match_time">Time</string>
+    <string name="new_match_city">City</string>
     <string name="title_activity_team">TeamActivity</string>
 
 </resources>

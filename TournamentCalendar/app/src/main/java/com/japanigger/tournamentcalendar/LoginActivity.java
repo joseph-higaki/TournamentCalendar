@@ -15,6 +15,7 @@ import com.facebook.Profile;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+import com.japanigger.tournamentcalendar.dao.rest.Response;
 
 import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
