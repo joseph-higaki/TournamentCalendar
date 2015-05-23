@@ -14,38 +14,36 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.japanigger.tournamentcalendar.dao.TeamDAO;
+import com.japanigger.tournamentcalendar.dao.rest.TaskGetTeams;
 import com.japanigger.tournamentcalendar.data.Team;
 
 import java.util.List;
 
 
-public class TeamActivity extends Activity {
-    private List<Team> teamList;
-    private TeamDAO teamDAO;
+public class TeamActivity extends Activity implements TaskGetTeams.OnTaskCompleted{
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
 
-
-
+    private List<Team> teamList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_team);
-
-        teamDAO = new TeamDAO();
-        teamList = teamDAO.getAll();
-
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
+        TaskGetTeams task = new TaskGetTeams(this);
+        task.execute();
+    }
 
+    @Override
+    public void onTaskCompleted(List<Team> teams) {
+        teamList = teams;
         // Set the adapter for the list view
-        mDrawerList.setAdapter(new ArrayAdapter<Team>(this,
-                R.layout.team_list_item, teamList));
+        mDrawerList.setAdapter(new ArrayAdapter<>(this,
+                R.layout.team_list_item, teams));
         // Set the list's click listener
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
-
-
     }
 
     /* The click listner for ListView in the navigation drawer */
