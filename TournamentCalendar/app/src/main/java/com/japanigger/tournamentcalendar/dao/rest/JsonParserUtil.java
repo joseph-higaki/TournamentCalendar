@@ -20,6 +20,47 @@ import java.util.List;
  */
 public class JsonParserUtil {
 
+
+    public JSONObject getJsonFromMatch(Match match) throws JSONException {
+        JSONObject holder = new JSONObject();
+        holder.put("id",match.getId());
+        holder.put("date",match.getDate());
+        holder.put("location",getJsonFromCity(match.getLocation()));
+        holder.put("team1",getJsonFromTeam(match.getTeam1()));
+        holder.put("team2",getJsonFromTeam(match.getTeam2()));
+        return holder;
+    }
+
+    private JSONObject getJsonFromTeam(Team team1) throws JSONException {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("id",team1.getId());
+        jsonObject.put("name",team1.getName());
+        jsonObject.put("players",getJsonFromPlayer(team1.getPlayers()));
+        return jsonObject;
+    }
+
+    private JSONArray getJsonFromPlayer(List<TeamPlayer> players) throws JSONException {
+        JSONObject jsonObject;
+        JSONArray jsonArray = new JSONArray();
+        for (int i=0;i<players.size();i++){
+            TeamPlayer player = players.get(i);
+            jsonObject= new JSONObject();
+            jsonObject.put("id",player.getId());
+            jsonObject.put("firstName",player.getFirstName());
+            jsonObject.put("lastName",player.getLastName());
+            jsonArray.put(jsonObject);
+        }
+        return jsonArray;
+    }
+
+    private JSONObject getJsonFromCity(City location) throws JSONException {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("id",location.getId());
+        jsonObject.put("name",location.getName());
+        return jsonObject;
+    }
+
+
     public List<Match> getMatches(JSONArray reader) throws JSONException {
         List<Match> matches = new ArrayList<>();
         Match match;
