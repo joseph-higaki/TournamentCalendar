@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -15,7 +16,7 @@ import com.facebook.Profile;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-import com.japanigger.tournamentcalendar.dao.rest.Response;
+//import com.japanigger.tournamentcalendar.dao.rest.Response;
 
 import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
@@ -64,6 +65,8 @@ public class LoginActivity extends RoboActivity {
             Log.d("FacebookApp", "" + profile.getFirstName());
             //txtSaludo.setText(getString(R.string.saludo, profile.getFirstName()));
             //profilePic.setProfileId(profile.getId());
+
+
         } else {
             Log.d("FacebookApp", "Aun no autenticado");
         }
@@ -114,4 +117,9 @@ public class LoginActivity extends RoboActivity {
         AppEventsLogger.deactivateApp(this);
     }
 
+
+    public void pretendFacebookLoginWorks(View view){
+        Intent intent = new Intent(this, TeamActivity.class);
+        startActivity(intent);
+    }
 }
