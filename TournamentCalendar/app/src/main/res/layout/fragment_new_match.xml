@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:padding="10dip">
         <!--  Date Label -->
-        <TextView android:layout_width="fill_parent"
+        <TextView android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#372c24"
             android:text="Date"/>
@@ -27,11 +27,12 @@
             android:layout_height="wrap_content"
             android:textColor="#372c24"
             android:text="Time"/>
-        <EditText android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dip"
-            android:layout_marginBottom="20dip"
-            android:singleLine="true"/>
+        <TextView
+            android:id="@+id/tvSelectTime"
+            android:clickable="true"
+            android:text="Select Time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
         <!--  City Label -->
         <TextView android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -39,6 +40,24 @@
             android:text="City"/>
         <Spinner
             android:id="@+id/city_spinner"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+        <!--  Team1 -->
+        <TextView android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#372c24"
+            android:text="Team 1"/>
+        <Spinner
+            android:id="@+id/team1_spinner"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+        <!--  Team2 -->
+        <TextView android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#372c24"
+            android:text="Team 2"/>
+        <Spinner
+            android:id="@+id/team2_spinner"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
         <!-- Save button -->
