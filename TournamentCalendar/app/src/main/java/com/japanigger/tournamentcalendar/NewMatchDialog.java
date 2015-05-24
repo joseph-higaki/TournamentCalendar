@@ -24,6 +24,8 @@ import com.japanigger.tournamentcalendar.data.City;
 import com.japanigger.tournamentcalendar.data.Team;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -33,12 +35,12 @@ public class NewMatchDialog extends DialogFragment implements TaskGetTeams.OnTas
     List<City> cities;
 
     //date picker
-    private int mYear, mMonth, mDay;
+    private int mYear=0, mMonth=0, mDay=0;
     private TextView tvSelectDate;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
     // Time picker
-    private int mHour, mMinute;
+    private int mHour=0, mMinute=0;
     private TextView tvSelectTime;
     private TimePickerDialog.OnTimeSetListener mTimeSetListener;
 
@@ -99,13 +101,18 @@ public class NewMatchDialog extends DialogFragment implements TaskGetTeams.OnTas
         TaskGetTeams task = new TaskGetTeams(this);
         task.execute();
 
-
         return view;
     }
 
     public void selectDate() {
         DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),
                 R.style.AppTheme, mDateSetListener, mYear, mMonth, mDay);
+        if(mDay>0) {
+            datePickerDialog.updateDate(mYear,mMonth,mDay);
+        }else{
+            Calendar c = Calendar.getInstance();
+            datePickerDialog.updateDate(c.get(Calendar.YEAR),c.get(Calendar.MONTH),c.get(Calendar.DAY_OF_MONTH));
+        }
         datePickerDialog.show();
     }
 
@@ -120,14 +127,20 @@ public class NewMatchDialog extends DialogFragment implements TaskGetTeams.OnTas
 
     public void selectTime() {
         TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(),
-                mTimeSetListener, mHour, mMinute,false);
+                mTimeSetListener, mHour, mMinute,true);
+        if(mHour>0){
+            timePickerDialog.updateTime(mHour,mMinute);
+        }else{
+            Calendar c = Calendar.getInstance();
+            timePickerDialog.updateTime(c.get(Calendar.HOUR_OF_DAY),c.get(Calendar.MINUTE));
+        }
         timePickerDialog.show();
     }
 
 
     private void updateTime() {
         tvSelectTime.setText(new StringBuilder().append(mHour)
-                .append(":").append(mMinute));
+                .append(":").append((mMinute<10)?"0"+mMinute:mMinute));
     }
 
     @Override

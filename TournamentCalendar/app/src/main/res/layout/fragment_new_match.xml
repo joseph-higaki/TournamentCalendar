@@ -32,7 +32,9 @@
             android:clickable="true"
             android:text="Select Time"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:layout_marginBottom="20dip"/>
         <!--  City Label -->
         <TextView android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -41,7 +43,9 @@
         <Spinner
             android:id="@+id/city_spinner"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:layout_marginBottom="20dip"/>
         <!--  Team1 -->
         <TextView android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -50,7 +54,9 @@
         <Spinner
             android:id="@+id/team1_spinner"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:layout_marginBottom="20dip"/>
         <!--  Team2 -->
         <TextView android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -59,13 +65,16 @@
         <Spinner
             android:id="@+id/team2_spinner"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:layout_marginBottom="20dip"/>
         <!-- Save button -->
         <Button android:id="@+id/btnSave"
-            android:layout_width="fill_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dip"
-            android:text="Save"/>
+            android:text="Save"
+            />
 
     </LinearLayout>
 </FrameLayout>
