@@ -6,6 +6,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,14 +14,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.japanigger.tournamentcalendar.dao.CityDAO;
 import com.japanigger.tournamentcalendar.dao.rest.TaskGetTeams;
 import com.japanigger.tournamentcalendar.data.City;
+import com.japanigger.tournamentcalendar.data.Match;
 import com.japanigger.tournamentcalendar.data.Team;
 
 import java.text.SimpleDateFormat;
@@ -46,6 +50,12 @@ public class NewMatchDialog extends DialogFragment implements TaskGetTeams.OnTas
 
     //Teams
     private Spinner team1, team2;
+
+    //Button
+    private Button btnSaveMatch;
+
+    //Match
+    private Match mMatch;
 
     @Nullable
     @Override
@@ -98,10 +108,31 @@ public class NewMatchDialog extends DialogFragment implements TaskGetTeams.OnTas
         team1 = (Spinner)view.findViewById(R.id.team1_spinner);
         team2 = (Spinner)view.findViewById(R.id.team2_spinner);
 
+        // Save Button
+        btnSaveMatch = (Button) view.findViewById(R.id.btnSaveMatch);
+        btnSaveMatch.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                saveMatch();
+            }
+        });
+
         TaskGetTeams task = new TaskGetTeams(this);
         task.execute();
 
         return view;
+    }
+
+    private void saveMatch(){
+        mMatch = new Match();
+
+
+
+        Context context = this.getActivity().getApplicationContext();
+        CharSequence text = "Match Saved";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
     }
 
     public void selectDate() {
