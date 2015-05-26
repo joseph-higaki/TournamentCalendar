@@ -1,80 +1,91 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.japanigger.tournamentcalendar.NewMatchDialog">
 
     <!-- TODO: Update blank fragment layout -->
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:padding="10dip">
         <!--  Date Label -->
-        <TextView android:layout_width="match_parent"
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#372c24"
-            android:text="Date"/>
-        <TextView android:layout_width="fill_parent"
+            android:text="Date"
+            android:textColor="#372c24" />
+
+        <TextView
+            android:id="@+id/tvSelectDate"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dip"
             android:layout_marginBottom="20dip"
-            android:text="select date"
+            android:layout_marginTop="5dip"
             android:clickable="true"
-            android:id="@+id/tvSelectDate"/>
+            android:text="select date" />
         <!--  Time Label -->
-        <TextView android:layout_width="fill_parent"
+        <TextView
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textColor="#372c24"
-            android:text="Time"/>
+            android:text="Time"
+            android:textColor="#372c24" />
+
         <TextView
             android:id="@+id/tvSelectTime"
-            android:clickable="true"
-            android:text="Select Time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dip"
             android:layout_marginTop="5dip"
-            android:layout_marginBottom="20dip"/>
+            android:clickable="true"
+            android:text="Select Time" />
         <!--  City Label -->
-        <TextView android:layout_width="fill_parent"
+        <TextView
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textColor="#372c24"
-            android:text="City"/>
+            android:text="City"
+            android:textColor="#372c24" />
+
         <Spinner
             android:id="@+id/city_spinner"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dip"
-            android:layout_marginBottom="20dip"/>
+            android:layout_marginBottom="20dip"
+            android:layout_marginTop="5dip" />
         <!--  Team1 -->
-        <TextView android:layout_width="fill_parent"
+        <TextView
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textColor="#372c24"
-            android:text="Team 1"/>
+            android:text="Team 1"
+            android:textColor="#372c24" />
+
         <Spinner
             android:id="@+id/team1_spinner"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dip"
-            android:layout_marginBottom="20dip"/>
+            android:layout_marginBottom="20dip"
+            android:layout_marginTop="5dip" />
         <!--  Team2 -->
-        <TextView android:layout_width="fill_parent"
+        <TextView
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textColor="#372c24"
-            android:text="Team 2"/>
+            android:text="Team 2"
+            android:textColor="#372c24" />
+
         <Spinner
             android:id="@+id/team2_spinner"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dip"
-            android:layout_marginBottom="20dip"/>
+            android:layout_marginBottom="20dip"
+            android:layout_marginTop="5dip" />
         <!-- Save button -->
-        <Button android:id="@+id/btnSaveMatch"
+        <Button
+            android:id="@+id/btnSaveMatch"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dip"
-            android:text="Save"
-            />
+            android:text="Save" />
 
     </LinearLayout>
 </FrameLayout>
