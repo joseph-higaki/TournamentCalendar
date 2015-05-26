@@ -14,7 +14,7 @@ public class MySQLOpenHelper extends SQLiteOpenHelper {
     private static final String TABLE_CITY = "city";
 
     private String sqlCreateCityTable =
-            "CREATE TABLE city (name VARCHAR(60) not null)";
+            "CREATE TABLE city (id integer primary key autoincrement, name VARCHAR(60) not null)";
 
     private String sqlInsertCityTable =
             "INSERT INTO city (name) values ('Lima'), ('Santiago'), ('Tarapoto')";

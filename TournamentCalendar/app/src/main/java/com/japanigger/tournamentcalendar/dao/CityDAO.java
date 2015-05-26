@@ -33,14 +33,14 @@ public class CityDAO {
     public List<City> getAll() {
         List<City> cities = new ArrayList<City>();
 
-        String query = "SELECT name FROM city";
+        String query = "SELECT id, name FROM city";
 
 
         try {
             open();
             Cursor cursor = database.rawQuery(query, null);
             for (boolean hasItem = cursor.moveToFirst(); hasItem; hasItem = cursor.moveToNext()) {
-                City city = new City(cursor.getString(cursor.getColumnIndex("name")));
+                City city = new City(cursor.getInt(cursor.getColumnIndex("id")), cursor.getString(cursor.getColumnIndex("name")));
                 cities.add(city);
             }
             cursor.close();

@@ -23,7 +23,8 @@ public class City {
         this.name = name;
     }
 
-    public City(String name) {
+    public City(int id, String name) {
+        this.id = id;
         this.name = name;
     }
     public City() {
