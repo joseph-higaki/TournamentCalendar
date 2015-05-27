@@ -49,6 +49,9 @@ public class NewMatchDialog extends DialogFragment implements TaskGetTeams.OnTas
     // city spinner
     private Spinner selectedCity;
 
+    // Notification ID
+    private int MY_NOTIFICATION_ID = 1;
+
     //date picker
     private int mYear = 0, mMonth = 0, mDay = 0;
     private TextView tvSelectDate;
@@ -231,8 +234,22 @@ public class NewMatchDialog extends DialogFragment implements TaskGetTeams.OnTas
             @Override
             public void onReceive(Context context, Intent intent) {
                 // add match info to notification
-                generateNotification();
-                //Toast.makeText(context, "Cities Updated", Toast.LENGTH_SHORT).show();
+                Intent myIntent= new Intent(context,ViewMatch.class);
+                PendingIntent notificationPendingIntent= PendingIntent.getActivity(context,0,myIntent,0);
+                Notification notification= new Notification.Builder(context)
+                        .setContentTitle("Tournament Notification")
+                        .setSmallIcon(R.drawable.ic_action_event)
+                        .setContentText("15 minutes to match.")
+                        .setContentIntent(notificationPendingIntent)
+                        .setDefaults(Notification.DEFAULT_SOUND)
+                        .setOngoing(false)
+                        .addAction(R.drawable.ic_action_event,"Open",notificationPendingIntent)
+                        .build();
+
+                NotificationManager notificationManager = (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
+                //notification.flags = Notification.FLAG_AUTO_CANCEL;
+                //notification.flags = Notification.FLAG_NO_CLEAR;
+                notificationManager.notify(MY_NOTIFICATION_ID,notification);
             }
         };
 
@@ -240,26 +257,6 @@ public class NewMatchDialog extends DialogFragment implements TaskGetTeams.OnTas
 
         pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, new Intent("Notify Match"), 0);
         alarmManager= (AlarmManager)getActivity().getSystemService(Context.ALARM_SERVICE);
-    }
-
-    private void generateNotification() {
-        NotificationManager notificationManager = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
-
-        Intent intent= new Intent(getActivity(),ViewMatch.class);
-        PendingIntent pendingIntent= PendingIntent.getActivity(getActivity(),0,intent,0);
-        Notification notification= new Notification.Builder(getActivity())
-                .setContentTitle("Tournament Notification")
-                .setSmallIcon(R.drawable.ic_action_event)
-                .setContentText("15 minutes to match.")
-                .setContentIntent(pendingIntent)
-                .addAction(R.drawable.ic_action_event,"Open",pendingIntent)
-                .build();
-
-
-        notification.flags |= Notification.FLAG_AUTO_CANCEL;
-
-        notificationManager.notify(0,notification);
-
     }
 
     @Override

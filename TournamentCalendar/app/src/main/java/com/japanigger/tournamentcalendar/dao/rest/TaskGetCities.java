@@ -40,7 +40,7 @@ public class TaskGetCities extends AsyncTask<String, Integer, List<City>> {
         try {
             HttpResponse httpResponse = client.execute(get);
             resultStr = EntityUtils.toString(httpResponse.getEntity());
-            Log.d("RESPONSE:: ", "response: " + resultStr);
+            //Log.d("RESPONSE:: ", "response: " + resultStr);
             JSONArray jsonCities = new JSONArray(resultStr);
             cities = parser.getCities(jsonCities);
         } catch (IOException e) {

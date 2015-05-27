@@ -41,7 +41,7 @@ public class TaskGetTeams extends AsyncTask<String, Integer, List<Team>> {
         try {
             HttpResponse httpResponse = client.execute(get);
             resultStr = EntityUtils.toString(httpResponse.getEntity());
-            Log.d("RESPONSE:: ", "response: " + resultStr);
+            //Log.d("RESPONSE:: ", "response: " + resultStr);
             JSONArray jsonTeams = new JSONArray(resultStr);
             teams = parser.getTeams(jsonTeams);
         } catch (IOException e) {

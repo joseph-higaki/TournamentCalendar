@@ -85,7 +85,7 @@ public class JsonParserUtil {
     }
 
     public List<Team> getTeams(JSONArray reader) throws JSONException {
-        Log.d(getClass().getName(),"getTeams value: "+reader.toString());
+        //Log.d(getClass().getName(),"getTeams value: "+reader.toString());
         List<Team> teams = new ArrayList<>();
         Team temp;
         for (int i = 0; i < reader.length(); i++) {
@@ -98,7 +98,7 @@ public class JsonParserUtil {
 
 
     public Team getTeam(JSONObject reader) throws JSONException {
-        Log.d(getClass().getName(), "getTeam values: " + reader.toString());
+        //Log.d(getClass().getName(), "getTeam values: " + reader.toString());
         Team team = new Team();
         team.setId(reader.getInt("id"));
         team.setName(reader.has("name") ? reader.getString("name") : "");
@@ -109,7 +109,7 @@ public class JsonParserUtil {
     }
 
     public List<City> getCities(JSONArray reader) throws JSONException {
-        Log.d(getClass().getName(),"getCities value: "+reader.toString());
+        //Log.d(getClass().getName(),"getCities value: "+reader.toString());
         List<City> cities = new ArrayList<>();
         City temp;
         for (int i = 0; i < reader.length(); i++) {
@@ -121,7 +121,7 @@ public class JsonParserUtil {
     }
 
     public City getCity(JSONObject reader) throws JSONException {
-        Log.d(getClass().getName(), "getCity values: " + reader.toString());
+        //Log.d(getClass().getName(), "getCity values: " + reader.toString());
         City city = new City();
         city.setId(reader.getInt("id"));
         city.setName(reader.has("name") ? reader.getString("name") : "");
@@ -129,7 +129,7 @@ public class JsonParserUtil {
     }
 
     private List<TeamPlayer> getPlayers(JSONArray jsonPlayers) throws JSONException {
-        Log.d(getClass().getName(),"getPlayers value: "+jsonPlayers.toString());
+        //Log.d(getClass().getName(),"getPlayers value: "+jsonPlayers.toString());
         List<TeamPlayer> players = new ArrayList<>();
         TeamPlayer temp;
         for (int i = 0; i < jsonPlayers.length(); i++) {

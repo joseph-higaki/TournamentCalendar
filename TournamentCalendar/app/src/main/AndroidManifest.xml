@@ -10,6 +10,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        <service android:name=".service.CityUpdateService"/>
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
@@ -45,6 +46,9 @@
             android:name=".AddMatch"
             android:label="@string/title_activity_add_match" >
         </activity>
+        <activity
+            android:name=".ViewMatch"
+            android:label="@string/title_activity_view_match"/>
         <activity
             android:name=".TeamActivity"
             android:label="@string/title_activity_team" >

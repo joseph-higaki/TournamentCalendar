@@ -38,7 +38,7 @@ public class TaskGetMatches extends AsyncTask<String, Integer, List<Match>> {
         try {
             HttpResponse httpResponse = client.execute(get);
             resultStr = EntityUtils.toString(httpResponse.getEntity());
-            Log.d("RESPONSE:: ", "response: " + resultStr);
+            //Log.d("RESPONSE:: ", "response: " + resultStr);
             JSONArray jsonTeams = new JSONArray(resultStr);
             matches = parser.getMatches(jsonTeams);
         } catch (IOException e) {
