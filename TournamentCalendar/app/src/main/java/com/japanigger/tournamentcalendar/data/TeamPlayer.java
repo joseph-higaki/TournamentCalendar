@@ -1,9 +1,11 @@
 package com.japanigger.tournamentcalendar.data;
 
+import java.io.Serializable;
+
 /**
  * Created by usuario on 5/21/2015.
  */
-public class TeamPlayer {
+public class TeamPlayer implements Serializable {
 
     private int id;
     private String firstName;

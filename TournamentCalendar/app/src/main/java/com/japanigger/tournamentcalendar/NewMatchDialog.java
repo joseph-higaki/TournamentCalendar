@@ -16,7 +16,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -74,7 +73,6 @@ public class NewMatchDialog extends DialogFragment implements TaskGetTeams.OnTas
 
     //Notification
     private BroadcastReceiver broadcastReceiver;
-    private PendingIntent pendingIntent;
     private AlarmManager alarmManager;
 
     @Nullable
@@ -162,7 +160,7 @@ public class NewMatchDialog extends DialogFragment implements TaskGetTeams.OnTas
         mMatch.setLocation(city);
         mMatch.setTeam1(team1Value);
         mMatch.setTeam2(team2Value);
-        String selectedDate = tvSelectDate.getText().toString()+" "+tvSelectTime.getText().toString();
+        String selectedDate = tvSelectDate.getText().toString() + " " + tvSelectTime.getText().toString();
         mMatch.setDate(selectedDate);
         Log.d(getClass().getName(), "city: " + city.getId() + " " + city.getName());
         Log.d(getClass().getName(), "Team 1: " + team1Value.getId() + " " + team1Value.getName());
@@ -175,11 +173,14 @@ public class NewMatchDialog extends DialogFragment implements TaskGetTeams.OnTas
 
         //add notification
         Calendar cal = Calendar.getInstance();
-        cal.set(mYear, mMonth, mDay, mHour, mMinute,00);
-        setAlarm(cal);
+        cal.set(mYear, mMonth, mDay, mHour, mMinute, 00);
+        setAlarm(cal, mMatch);
     }
 
-    private void setAlarm(Calendar targetCal){
+    private void setAlarm(Calendar targetCal, Match mMatch) {
+        Intent intent = new Intent("Notify Match");
+        intent.putExtra("selectedMatch", mMatch);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, 0);
         alarmManager.set(AlarmManager.RTC_WAKEUP, targetCal.getTimeInMillis(), pendingIntent);
         Log.d(this.getClass().toString(), "*ALARM SET:" + targetCal.toString());
     }
@@ -234,46 +235,47 @@ public class NewMatchDialog extends DialogFragment implements TaskGetTeams.OnTas
 
     @Override
     public void onTaskPostCompleted(Boolean response) {
-        if (response){
+        if (response) {
             Toast.makeText(this.getActivity().getApplicationContext(), "Match Saved", Toast.LENGTH_LONG).show();
-        }else{
+        } else {
             Toast.makeText(this.getActivity().getApplicationContext(), "Error saving match", Toast.LENGTH_LONG).show();
         }
     }
 
-    private void setupAlarm(){
+    private void setupAlarm() {
         broadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
+                Bundle c = intent.getExtras();
+                Match match = (Match) c.getSerializable("selectedMatch");
+                Log.d(getClass().getName(), "MATCH SELECTED: " + match.getId() + " " + match.getLocation().getName() + " "+match.getTeam1().getName() + " " + match.getTeam2().getName());
                 // add match info to notification
-                Intent myIntent= new Intent(context,ViewMatch.class);
-                PendingIntent notificationPendingIntent= PendingIntent.getActivity(context,0,myIntent,0);
-                Notification notification= new Notification.Builder(context)
+                Intent myIntent = new Intent(context, ViewMatch.class);
+                myIntent.putExtra("selectedMatch",match);
+                PendingIntent notificationPendingIntent = PendingIntent.getActivity(context, 0, myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                Notification notification = new Notification.Builder(context)
                         .setContentTitle("Tournament Notification")
                         .setSmallIcon(R.drawable.ic_action_event)
                         .setContentText("15 minutes to match.")
                         .setContentIntent(notificationPendingIntent)
                         .setDefaults(Notification.DEFAULT_SOUND)
                         .setOngoing(false)
-                        .addAction(R.drawable.ic_action_event,"Open",notificationPendingIntent)
+                        .addAction(R.drawable.ic_action_event, "Open", notificationPendingIntent)
                         .build();
 
                 NotificationManager notificationManager = (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
                 //notification.flags = Notification.FLAG_AUTO_CANCEL;
                 //notification.flags = Notification.FLAG_NO_CLEAR;
-                notificationManager.notify(MY_NOTIFICATION_ID,notification);
+                notificationManager.notify(MY_NOTIFICATION_ID, notification);
             }
         };
 
         getActivity().registerReceiver(broadcastReceiver, new IntentFilter("Notify Match"));
-
-        pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, new Intent("Notify Match"), 0);
-        alarmManager= (AlarmManager)getActivity().getSystemService(Context.ALARM_SERVICE);
+        alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
     }
 
     @Override
-    public void onStop()
-    {
+    public void onStop() {
         getActivity().unregisterReceiver(broadcastReceiver);
         super.onStop();
     }

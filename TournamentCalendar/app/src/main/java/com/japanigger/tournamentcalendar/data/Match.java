@@ -1,9 +1,11 @@
 package com.japanigger.tournamentcalendar.data;
 
+import java.io.Serializable;
+
 /**
  * Created by usuario on 5/21/2015.
  */
-public class Match {
+public class Match implements Serializable{
     private long id;
     private String date;
     private City location;
