@@ -16,6 +16,7 @@ import com.facebook.Profile;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+import com.facebook.login.widget.ProfilePictureView;
 //import com.japanigger.tournamentcalendar.dao.rest.Response;
 
 import roboguice.activity.RoboActivity;
@@ -64,6 +65,7 @@ public class LoginActivity extends RoboActivity {
         if (habiliarBotones && profile != null) {
             Log.d("FacebookApp", "" + profile.getFirstName());
             //txtSaludo.setText(getString(R.string.saludo, profile.getFirstName()));
+            //ProfilePictureView profilePic = (ProfilePictureView) findViewById(R.id.profilePicture);
             //profilePic.setProfileId(profile.getId());
 
 
