@@ -7,4 +7,10 @@
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/view_calendar"
+        android:orderInCategory="200"
+        android:icon="@drawable/ic_drawer"
+        android:title="@string/view_calendar"
+        app:showAsAction="always" />
 </menu>

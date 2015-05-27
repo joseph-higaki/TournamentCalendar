@@ -26,5 +26,6 @@
     <string name="new_match_time">Time</string>
     <string name="new_match_city">City</string>
     <string name="title_activity_team">TeamActivity</string>
+    <string name="view_calendar">View Calendar</string>
 
 </resources>
