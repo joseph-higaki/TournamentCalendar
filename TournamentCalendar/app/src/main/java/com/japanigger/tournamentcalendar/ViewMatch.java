@@ -67,8 +67,10 @@ public class ViewMatch extends ActionBarActivity {
         Log.d(getClass().getName(), "VIEW MATCH ACTIVITY");
         match = (Match) getIntent().getSerializableExtra("selectedMatch");
         Log.d(getClass().getName(), "object match: "+match);
-        TextView txtViewMatch = (TextView) findViewById(R.id.txtViewMatch);
-        //txtViewMatch.setText("MATCH SELECTED: " + match.getId() + " " + match.getLocation().getName() + " "+match.getTeam1().getName() + " " + match.getTeam2().getName());
+
+        ((TextView)findViewById(R.id.tvMatchTeams)).setText(match.getTeam1().getName() + " vs. " + match.getTeam2().getName());
+        ((TextView)findViewById(R.id.tvMatchCity)).setText(match.getLocation().toString());
+        ((TextView)findViewById(R.id.tvMatchDateTime)).setText(match.getDate());
 
         shareDialog = new ShareDialog(this);
         shareDialog.registerCallback(callbackManager,shareCallback);

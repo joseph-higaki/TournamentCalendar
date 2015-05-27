@@ -10,16 +10,34 @@
     tools:context="com.japanigger.tournamentcalendar.ViewMatch">
 
     <TextView
-        android:id="@+id/txtViewMatch"
+    android:id="@+id/tvMatchTeams"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+        android:layout_marginBottom="20dip"
+        android:layout_marginTop="5dip"
+        android:text="Team1 vs. Team2"/>
+    />
+    <TextView
+        android:id="@+id/tvMatchDateTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="View Match" />
-
+        android:layout_marginBottom="20dip"
+        android:layout_marginTop="5dip"
+        android:text="date and time"/>
+        />
+    <TextView
+        android:id="@+id/tvMatchCity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dip"
+        android:layout_marginTop="5dip"
+        android:text="Match Location"/>
+        />
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="facebookPost"
-        android:text="Postear encuentro"/>
+        android:text="Share in Facebook"/>
 
 
 </LinearLayout>
