@@ -3,14 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.japanigger.tournamentcalendar.TeamActivity">
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
-    <item
         android:id="@+id/view_calendar"
         android:orderInCategory="200"
-        android:icon="@drawable/ic_drawer"
+        android:icon="@drawable/ic_calendar_multiple"
         android:title="@string/view_calendar"
         app:showAsAction="always" />
 </menu>

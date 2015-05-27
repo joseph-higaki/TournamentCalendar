@@ -5,7 +5,10 @@
     tools:context="com.japanigger.tournamentcalendar.TeamPlayerFragment">
 
     <GridView android:id="@android:id/list" android:layout_width="match_parent"
-        android:layout_height="match_parent" android:numColumns="2" />
+        android:layout_height="match_parent" android:numColumns="2"
+        android:background="@color/listBackgroundColor"
+        android:textColor="@color/toolbarTextColorPrimary"
+        />
 
     <TextView android:id="@android:id/empty" android:layout_width="match_parent"
         android:layout_height="match_parent" android:gravity="center" />

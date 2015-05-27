@@ -144,8 +144,11 @@ public class TeamPlayerFragment extends Fragment implements AbsListView.OnItemCl
     public void onTaskCompleted(List<Team> teams) {
         teamList=teams;
         Team selectedTeam = teamList.get(mTeamPosition);
+        //mDrawerList.setAdapter(new ArrayAdapter<>(getActivity(), R.layout.team_player_list_item, teams));
+
+
         mAdapter = new ArrayAdapter<TeamPlayer>(getActivity(),
-                android.R.layout.simple_list_item_1, android.R.id.text1, selectedTeam.getPlayers());
+                R.layout.team_player_list_item, selectedTeam.getPlayers());
         ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
     }
 
