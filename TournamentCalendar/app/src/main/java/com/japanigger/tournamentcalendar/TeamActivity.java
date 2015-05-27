@@ -20,6 +20,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.facebook.Profile;
+import com.facebook.login.widget.ProfilePictureView;
 import com.japanigger.tournamentcalendar.dao.TeamDAO;
 import com.japanigger.tournamentcalendar.dao.rest.TaskGetTeams;
 import com.japanigger.tournamentcalendar.data.Team;
@@ -47,6 +49,10 @@ public class TeamActivity extends ActionBarActivity  implements TeamListFragment
 
         TeamListFragment teamListFragment = (TeamListFragment)getSupportFragmentManager().findFragmentById(R.id.fragment_team_list);
         teamListFragment.setUp(R.id.fragment_team_list, (DrawerLayout)findViewById(R.id.drawer_layout), toolbar);
+
+        Profile profile = Profile.getCurrentProfile();
+        ProfilePictureView profilePic = (ProfilePictureView) findViewById(R.id.profilePicture);
+        profilePic.setProfileId(profile.getId());
     }
 
     /*implementing TeamListFragment.OnSelectedTeamListener{ */
