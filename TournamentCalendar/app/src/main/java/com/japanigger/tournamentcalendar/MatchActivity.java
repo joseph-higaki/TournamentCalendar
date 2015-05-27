@@ -1,5 +1,6 @@
 package com.japanigger.tournamentcalendar;
 
+//import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.FragmentManager;
@@ -10,6 +11,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,7 +23,7 @@ import com.japanigger.tournamentcalendar.data.City;
 
 import java.util.List;
 
-public class MatchActivity extends Activity implements TaskGetCities.OnGetCitiesTaskCompleted{
+public class MatchActivity extends ActionBarActivity implements TaskGetCities.OnGetCitiesTaskCompleted{
 
     private static final long FIVE_SECONDS=5000;
     private BroadcastReceiver broadcastReceiver;
@@ -38,7 +40,7 @@ public class MatchActivity extends Activity implements TaskGetCities.OnGetCities
         setupAlarm();
     }
 
-    public void showNewMatchDialog(View view){
+    public void showNewMatchDialog(){
         FragmentManager fragmentManager = getFragmentManager();
         NewMatchDialog newMatchDialog = new NewMatchDialog();
         newMatchDialog.show(fragmentManager, "newMatchDialog");
@@ -67,6 +69,11 @@ public class MatchActivity extends Activity implements TaskGetCities.OnGetCities
             return true;
         }
 
+        if (id == R.id.new_match) {
+            //UPDATE CITIES
+            showNewMatchDialog();
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 

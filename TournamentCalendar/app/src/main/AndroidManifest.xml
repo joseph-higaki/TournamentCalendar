@@ -24,6 +24,7 @@
             </intent-filter>
         </activity>
         <activity
+            android:theme="@style/Theme.AppCompat.Light"
             android:name=".MatchActivity"
             android:label="@string/match_activity_title" >
 

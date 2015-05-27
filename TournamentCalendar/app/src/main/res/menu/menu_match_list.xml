@@ -3,6 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.japanigger.tournamentcalendar.MatchActivity">
     <item
+        android:id="@+id/new_match"
+        android:icon="@drawable/ic_action_new_event"
+        android:title="New Match"
+        app:showAsAction="ifRoom"/>
+
+    <item
         android:id="@+id/update_cities"
         android:orderInCategory="100"
         android:title="Update cities"
