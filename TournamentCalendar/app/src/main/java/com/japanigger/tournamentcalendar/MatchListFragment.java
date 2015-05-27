@@ -20,7 +20,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.japanigger.tournamentcalendar.dao.rest.TaskGetCities;
 import com.japanigger.tournamentcalendar.dao.rest.TaskGetMatches;
+import com.japanigger.tournamentcalendar.data.City;
 import com.japanigger.tournamentcalendar.data.Match;
 import com.japanigger.tournamentcalendar.dummy.DummyContent;
 

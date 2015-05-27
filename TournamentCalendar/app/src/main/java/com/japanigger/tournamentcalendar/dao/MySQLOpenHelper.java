@@ -16,8 +16,7 @@ public class MySQLOpenHelper extends SQLiteOpenHelper {
     private String sqlCreateCityTable =
             "CREATE TABLE city (id integer primary key autoincrement, name VARCHAR(60) not null)";
 
-    private String sqlInsertCityTable =
-            "INSERT INTO city (name) values ('Lima'), ('Santiago'), ('Tarapoto')";
+    private String sqlInsertCityTable = "INSERT INTO city (name) values ('Santiago'), ('Lima')";
 
     private String sqlDropCityTable = " drop table if exists city ";
 
@@ -33,7 +32,7 @@ public class MySQLOpenHelper extends SQLiteOpenHelper {
         db.execSQL(sqlCreateCityTable);
         Log.d(this.getClass().toString(), "after onCreate");
         db.execSQL(sqlInsertCityTable);
-        Log.d(this.getClass().toString(), "after Insert");
+        //Log.d(this.getClass().toString(), "after Insert");
     }
 
     @Override

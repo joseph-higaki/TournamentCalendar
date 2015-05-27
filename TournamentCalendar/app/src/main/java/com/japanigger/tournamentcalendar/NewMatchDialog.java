@@ -157,7 +157,7 @@ public class NewMatchDialog extends DialogFragment implements TaskGetTeams.OnTas
 
     private void updateDate() {
         GregorianCalendar c = new GregorianCalendar(mYear, mMonth, mDay);
-        SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
         tvSelectDate.setText(sdf.format(c.getTime()));
         //sdf = new SimpleDateFormat("yyyy-MM-dd");
         //transDateString=sdf.format(c.getTime());

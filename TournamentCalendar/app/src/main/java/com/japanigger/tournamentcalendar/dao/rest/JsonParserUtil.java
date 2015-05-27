@@ -96,6 +96,7 @@ public class JsonParserUtil {
         return teams;
     }
 
+
     public Team getTeam(JSONObject reader) throws JSONException {
         Log.d(getClass().getName(), "getTeam values: " + reader.toString());
         Team team = new Team();
@@ -105,6 +106,26 @@ public class JsonParserUtil {
             team.setPlayers(getPlayers(reader.getJSONArray("players")));
         }
         return team;
+    }
+
+    public List<City> getCities(JSONArray reader) throws JSONException {
+        Log.d(getClass().getName(),"getCities value: "+reader.toString());
+        List<City> cities = new ArrayList<>();
+        City temp;
+        for (int i = 0; i < reader.length(); i++) {
+            JSONObject jsonCity = reader.getJSONObject(i);
+            temp = getCity(jsonCity);
+            cities.add(temp);
+        }
+        return cities;
+    }
+
+    public City getCity(JSONObject reader) throws JSONException {
+        Log.d(getClass().getName(), "getCity values: " + reader.toString());
+        City city = new City();
+        city.setId(reader.getInt("id"));
+        city.setName(reader.has("name") ? reader.getString("name") : "");
+        return city;
     }
 
     private List<TeamPlayer> getPlayers(JSONArray jsonPlayers) throws JSONException {

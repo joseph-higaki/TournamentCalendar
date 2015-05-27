@@ -1,5 +1,6 @@
         package com.japanigger.tournamentcalendar.dao;
 
+        import android.content.ContentValues;
         import android.content.Context;
         import android.database.Cursor;
         import android.database.sqlite.SQLiteDatabase;
@@ -32,9 +33,7 @@ public class CityDAO {
 
     public List<City> getAll() {
         List<City> cities = new ArrayList<City>();
-
         String query = "SELECT id, name FROM city";
-
 
         try {
             open();
@@ -52,5 +51,23 @@ public class CityDAO {
             close();
         }
         return cities;
+    }
+
+    public void updateCities(List<City> cities){
+        try {
+            open();
+            // TRUNCATE TABLE CITY
+            database.delete("city",null,null);
+            for (int i = 0; i < cities.size(); i++) {
+                ContentValues values = new ContentValues();
+                values.put("id", cities.get(i).getId());
+                values.put("name", cities.get(i).getName());
+                database.insert("city", null, values);
+            }
+        }catch (SQLiteException ex){
+            Log.d(this.getClass().toString(), "ex---> " + ex.getMessage());
+        }finally {
+            close();
+        }
     }
 }
