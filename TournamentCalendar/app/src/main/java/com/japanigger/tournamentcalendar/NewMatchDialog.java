@@ -11,6 +11,7 @@ import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Build;
@@ -65,7 +66,7 @@ public class NewMatchDialog extends DialogFragment implements TaskGetTeams.OnTas
     private Spinner team1, team2;
 
     //Button
-    private Button btnSaveMatch;
+    private Button btnSaveMatch, btnClose;
 
     //Match
     private Match mMatch;
@@ -133,6 +134,15 @@ public class NewMatchDialog extends DialogFragment implements TaskGetTeams.OnTas
             }
         });
 
+        // Close Button
+        btnClose = (Button) view.findViewById(R.id.btnClose);
+        btnClose.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getDialog().dismiss();
+            }
+        });
+
         TaskGetTeams task = new TaskGetTeams(this);
         task.execute();
 
@@ -156,6 +166,8 @@ public class NewMatchDialog extends DialogFragment implements TaskGetTeams.OnTas
         Log.d(getClass().getName(), "Team 1: " + team1Value.getId() + " " + team1Value.getName());
         Log.d(getClass().getName(), "Team 2: " + team2Value.getId() + " " + team2Value.getName());
         Log.d(getClass().getName(), "Date: " + selectedDate);
+
+        //erase and uncomment
         TaskPostMatch task = new TaskPostMatch(this);
         task.execute(mMatch);
 

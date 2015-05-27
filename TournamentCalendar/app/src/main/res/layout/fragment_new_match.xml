@@ -82,10 +82,16 @@
         <!-- Save button -->
         <Button
             android:id="@+id/btnSaveMatch"
-            android:layout_width="300dp"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dip"
             android:text="Save" />
 
+        <Button
+            android:id="@+id/btnClose"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip"
+            android:text="Close" />
     </LinearLayout>
 </FrameLayout>
