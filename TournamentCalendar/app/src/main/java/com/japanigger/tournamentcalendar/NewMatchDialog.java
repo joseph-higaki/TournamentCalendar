@@ -2,11 +2,20 @@ package com.japanigger.tournamentcalendar;
 
 
 import android.annotation.TargetApi;
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.DialogFragment;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -58,6 +67,11 @@ public class NewMatchDialog extends DialogFragment implements TaskGetTeams.OnTas
 
     //Match
     private Match mMatch;
+
+    //Notification
+    private BroadcastReceiver broadcastReceiver;
+    private PendingIntent pendingIntent;
+    private AlarmManager alarmManager;
 
     @Nullable
     @Override
@@ -121,6 +135,9 @@ public class NewMatchDialog extends DialogFragment implements TaskGetTeams.OnTas
         TaskGetTeams task = new TaskGetTeams(this);
         task.execute();
 
+        //For Match Notification
+        setupAlarm();
+
         return view;
     }
 
@@ -140,7 +157,18 @@ public class NewMatchDialog extends DialogFragment implements TaskGetTeams.OnTas
         Log.d(getClass().getName(), "Date: " + selectedDate);
         TaskPostMatch task = new TaskPostMatch(this);
         task.execute(mMatch);
+
+        //add notification
+        Calendar cal = Calendar.getInstance();
+        cal.set(mYear, mMonth, mDay, mHour, mMinute,00);
+        setAlarm(cal);
     }
+
+    private void setAlarm(Calendar targetCal){
+        alarmManager.set(AlarmManager.RTC_WAKEUP, targetCal.getTimeInMillis(), pendingIntent);
+        Log.d(this.getClass().toString(), "*ALARM SET:" + targetCal.toString());
+    }
+
 
     public void selectDate() {
         DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),
@@ -157,7 +185,7 @@ public class NewMatchDialog extends DialogFragment implements TaskGetTeams.OnTas
 
     private void updateDate() {
         GregorianCalendar c = new GregorianCalendar(mYear, mMonth, mDay);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         tvSelectDate.setText(sdf.format(c.getTime()));
         //sdf = new SimpleDateFormat("yyyy-MM-dd");
         //transDateString=sdf.format(c.getTime());
@@ -174,7 +202,6 @@ public class NewMatchDialog extends DialogFragment implements TaskGetTeams.OnTas
         }
         timePickerDialog.show();
     }
-
 
     private void updateTime() {
         tvSelectTime.setText(new StringBuilder().append(mHour)
@@ -197,5 +224,48 @@ public class NewMatchDialog extends DialogFragment implements TaskGetTeams.OnTas
         }else{
             Toast.makeText(this.getActivity().getApplicationContext(), "Error saving match", Toast.LENGTH_LONG).show();
         }
+    }
+
+    private void setupAlarm(){
+        broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                // add match info to notification
+                generateNotification();
+                //Toast.makeText(context, "Cities Updated", Toast.LENGTH_SHORT).show();
+            }
+        };
+
+        getActivity().registerReceiver(broadcastReceiver, new IntentFilter("Notify Match"));
+
+        pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, new Intent("Notify Match"), 0);
+        alarmManager= (AlarmManager)getActivity().getSystemService(Context.ALARM_SERVICE);
+    }
+
+    private void generateNotification() {
+        NotificationManager notificationManager = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+
+        Intent intent= new Intent(getActivity(),ViewMatch.class);
+        PendingIntent pendingIntent= PendingIntent.getActivity(getActivity(),0,intent,0);
+        Notification notification= new Notification.Builder(getActivity())
+                .setContentTitle("Tournament Notification")
+                .setSmallIcon(R.drawable.ic_action_event)
+                .setContentText("15 minutes to match.")
+                .setContentIntent(pendingIntent)
+                .addAction(R.drawable.ic_action_event,"Open",pendingIntent)
+                .build();
+
+
+        notification.flags |= Notification.FLAG_AUTO_CANCEL;
+
+        notificationManager.notify(0,notification);
+
+    }
+
+    @Override
+    public void onStop()
+    {
+        getActivity().unregisterReceiver(broadcastReceiver);
+        super.onStop();
     }
 }

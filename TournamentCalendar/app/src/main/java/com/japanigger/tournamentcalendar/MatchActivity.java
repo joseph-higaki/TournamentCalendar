@@ -99,7 +99,7 @@ public class MatchActivity extends ActionBarActivity implements TaskGetCities.On
     }
 
     @Override
-    protected void  onDestroy(){
+    protected void onDestroy(){
         alarmManager.cancel(pendingIntent);
         unregisterReceiver(broadcastReceiver);
         super.onDestroy();
