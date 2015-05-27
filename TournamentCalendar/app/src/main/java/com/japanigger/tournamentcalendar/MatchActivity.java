@@ -12,6 +12,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,6 +30,7 @@ public class MatchActivity extends ActionBarActivity implements TaskGetCities.On
     private BroadcastReceiver broadcastReceiver;
     private PendingIntent pendingIntent;
     private AlarmManager alarmManager;
+    private Toolbar toolbar;
 
     // UpdateCities
     private List<City> cityList;
@@ -37,6 +39,9 @@ public class MatchActivity extends ActionBarActivity implements TaskGetCities.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_match);
+        toolbar = (Toolbar)findViewById(R.id.team_player_bar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setupAlarm();
     }
 
