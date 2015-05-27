@@ -24,9 +24,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:theme="@style/Theme.AppCompat.Light"
             android:name=".MatchActivity"
             android:label="@string/match_activity_title" >
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.japanigger.tournamentcalendar.TeamActivity"></meta-data>
 
         </activity>
         <meta-data
